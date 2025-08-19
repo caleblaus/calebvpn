@@ -1,0 +1,17 @@
+[
+  { "hostname": "ca-tor.pvdata.host" },
+{ "hostname": "ca-van.pvdata.host" },
+{ "hostname": "cy-lim.pvdata.host" },
+{ "hostname": "dk-cop.pvdata.host" },
+{ "hostname": "fr-par.pvdata.host" },
+{ "hostname": "de-ber.pvdata.host" },
+{ "hostname": "de-fra.pvdata.host" },
+{ "hostname": "in-mum.pvdata.host" },
+{ "hostname": "im-bal.pvdata.host" },
+{ "hostname": "il-tel.pvdata.host" },
+{ "hostname": "lv-rig.pvdata.host" },
+{ "hostname": "lt-sia.pvdata.host" },
+{ "hostname": "lu-lux.pvdata.host" },
+{ "hostname": "es-mad.pvdata.host" },
+{ "hostname": "tr-ist.pvdata.host" }
+]

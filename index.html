@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VPN Server Map</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; width: 100vw; }
+    .label-text {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    text-shadow: 1px 2px 2px rgb(71, 167, 15);
+    background: none !important; /* transparent background */
+    border: none !important;
+    box-shadow: none !important;
+    white-space: nowrap;
+    overflow: visible;
+    min-width: 100px;
+    max-width: 300px;
+    font-size: 14px;
+    pointer-events: none; /* allow clicks to pass through label */
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td, th {
+      border: 1px solid #ddd;
+      padding: 4px 8px;
+    }
+    th {
+      background: #f2f2f2;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-labeltextcollision/L.LabelTextCollision.js"></script>
+  <script>
+    const map = L.map('map').setView([20, 0], 2);
+
+    // Force English basemap
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //   attribution: '© OpenStreetMap contributors',
+    //   detectRetina: true
+    // }).addTo(map);
+
+//     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://www.carto.com/">CARTO</a>',
+//     subdomains: 'abcd',
+//     maxZoom: 20
+// }).addTo(map);
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ',
+    maxZoom: 20
+}).addTo(map);
+
+
+
+    const purpleIcon = new L.Icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [20, 30],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    // Load both JSON files and compare
+    const redIcon = new L.Icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [20, 30],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    Promise.all([
+      fetch('vpn_servers.json').then(res => res.json()),
+      fetch('down_servers.json').then(res => res.json())
+    ]).then(([servers, downServers]) => {
+      const downSet = new Set(downServers.map(s => s.hostname));
+      const labelMarkers = [];
+      const pinMarkers = [];
+      servers.forEach(server => {
+        const isDown = downSet.has(server.hostname);
+        const icon = isDown ? redIcon : purpleIcon;
+        const status = isDown ? 'DOWN' : 'UP';
+        const statusColor = isDown ? 'red' : 'green';
+
+        // Pin marker
+        const marker = L.marker([server.lat, server.lng], { icon }).addTo(map);
+        pinMarkers.push(marker);
+
+        // Label above pin
+        const label = L.marker([server.lat, server.lng], {
+          icon: L.divIcon({
+            className: 'label-text',
+            html: `<span>${server.country} - ${server.city}</span>`,
+            iconSize: [null, null],
+            iconAnchor: [50, 55]
+          })
+        }).addTo(map);
+        labelMarkers.push(label);
+
+        // Popup table with colored status
+        const popupHtml = `
+          <table>
+            <tr><th>Hostname</th><td>${server.hostname}</td></tr>
+            <tr><th>Status</th><td style="color:${statusColor};font-weight:bold;">${status}</td></tr>
+            <tr><th>OpenVPN TAP UDP</th><td>${server.openvpn_tap_udp}</td></tr>
+            <tr><th>OpenVPN TUN UDP</th><td>${server.openvpn_tun_udp}</td></tr>
+            <tr><th>OpenVPN TUN TCP</th><td>${server.openvpn_tun_tcp}</td></tr>
+            <tr><th>Socks5 Proxy</th><td>${server.socks5_proxy}</td></tr>
+            <tr><th>HTTP Proxy</th><td>${server.http_proxy}</td></tr>
+          </table>
+        `;
+        marker.bindPopup(popupHtml);
+      });
+
+      // Hide labels and pins when zoomed out, show when zoomed in
+      function updateMarkerVisibility() {
+        const zoom = map.getZoom();
+        labelMarkers.forEach(label => {
+          if (zoom < 4) {
+            map.removeLayer(label);
+          } else {
+            if (!map.hasLayer(label)) {
+              map.addLayer(label);
+            }
+          }
+        });
+        pinMarkers.forEach(marker => {
+          if (zoom < 3) {
+            map.removeLayer(marker);
+          } else {
+            if (!map.hasLayer(marker)) {
+              map.addLayer(marker);
+            }
+          }
+        });
+      }
+      map.on('zoomend', updateMarkerVisibility);
+      updateMarkerVisibility();
+    });
+  </script>
+</body>
+</html>
