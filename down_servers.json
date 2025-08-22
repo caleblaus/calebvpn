@@ -15,7 +15,9 @@
 { "hostname": "es-mad.pvdata.host" },
 { "hostname": "tr-ist.pvdata.host" },
   { "hostname": "kr-seo.pvdata.host" },
-  { "hostname": "ee-tal.pvdata.host" }
+  { "hostname": "ee-tal.pvdata.host" },
+  { "hostname": "br-sao.pvdata.host" }
 ]
+
 
 
