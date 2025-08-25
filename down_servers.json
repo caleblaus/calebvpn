@@ -16,8 +16,10 @@
 { "hostname": "tr-ist.pvdata.host" },
   { "hostname": "kr-seo.pvdata.host" },
   { "hostname": "ee-tal.pvdata.host" },
-  { "hostname": "br-sao.pvdata.host" }
+  { "hostname": "br-sao.pvdata.host" },
+  { "hostname": "pe-lim.pvdata.host }
 ]
+
 
 
 
