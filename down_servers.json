@@ -8,7 +8,7 @@
 { "hostname": "de-fra.pvdata.host" },
 { "hostname": "in-mum.pvdata.host" },
 { "hostname": "im-bal.pvdata.host" },
-{ "hostname": "il-tel.pvdata.host" },
+
 { "hostname": "lv-rig.pvdata.host" },
 { "hostname": "lt-sia.pvdata.host" },
 { "hostname": "lu-lux.pvdata.host" },
@@ -19,6 +19,7 @@
   { "hostname": "br-sao.pvdata.host" },
   { "hostname": "pe-lim.pvdata.host" }
 ]
+
 
 
 
