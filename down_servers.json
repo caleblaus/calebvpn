@@ -1,7 +1,7 @@
 [
   { "hostname": "ca-tor.pvdata.host" },
-{ "hostname": "ca-van.pvdata.host" },
-{ "hostname": "cy-lim.pvdata.host" },
+
+
 { "hostname": "dk-cop.pvdata.host" },
 { "hostname": "fr-par.pvdata.host" },
 { "hostname": "de-ber.pvdata.host" },
@@ -20,6 +20,7 @@
   { "hostname": "pe-lim.pvdata.host" },
   { "hostname": "nl-ams.pvdata.host" }
 ]
+
 
 
 
