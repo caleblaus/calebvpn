@@ -18,8 +18,14 @@
   { "hostname": "ee-tal.pvdata.host" },
   { "hostname": "br-sao.pvdata.host" },
   { "hostname": "pe-lim.pvdata.host" },
-  { "hostname": "nl-ams.pvdata.host" }
+  { "hostname": "nl-ams.pvdata.host" },
+  { "hostname": "co-bog.pvdata.host" },
+  { "hostname": "mx-mex.pvdata.host" },
+  { "hostname": "pa-pan.pvdata.host" },
+  { "hostname": "pe-lim.pvdata.host" },
+  { "hostname": "ph-man.pvdata.host" }
 ]
+
 
 
 
