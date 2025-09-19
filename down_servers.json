@@ -23,8 +23,10 @@
   { "hostname": "mx-mex.pvdata.host" },
   { "hostname": "pa-pan.pvdata.host" },
   { "hostname": "pe-lim.pvdata.host" },
-  { "hostname": "ph-man.pvdata.host" }
+  { "hostname": "ph-man.pvdata.host" },
+  { "hostname": "ie-dub.pvdata.host"}
 ]
+
 
 
 
