@@ -1,6 +1,6 @@
 [
   { "hostname": "ca-tor.pvdata.host" },
-
+{ "hostname": "it-mil.pvdata.host" },
 
 { "hostname": "dk-cop.pvdata.host" },
 { "hostname": "fr-par.pvdata.host" },
@@ -21,6 +21,7 @@
   { "hostname": "nl-ams.pvdata.host" }
   
 ]
+
 
 
 
