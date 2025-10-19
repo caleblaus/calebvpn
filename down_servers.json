@@ -10,10 +10,10 @@
 { "hostname": "im-bal.pvdata.host" },
 
 { "hostname": "lv-rig.pvdata.host" },
-{ "hostname": "lt-sia.pvdata.host" },
+
 { "hostname": "lu-lux.pvdata.host" },
 { "hostname": "es-mad.pvdata.host" },
-{ "hostname": "tr-ist.pvdata.host" },
+
   
   
   { "hostname": "br-sao.pvdata.host" },
@@ -21,6 +21,7 @@
   { "hostname": "nl-ams.pvdata.host" }
   
 ]
+
 
 
 
