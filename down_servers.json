@@ -14,11 +14,12 @@
 { "hostname": "lv-rig.pvdata.host" },
 { "hostname": "es-mad.pvdata.host" },
 
-{ "hostname": "br-sao.pvdata.host" },
+
 { "hostname": "pe-lim.pvdata.host" },
 { "hostname": "nl-ams.pvdata.host" }
   
 ]
+
 
 
 
